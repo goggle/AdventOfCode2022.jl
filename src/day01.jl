@@ -5,9 +5,7 @@ using AdventOfCode2022
 function day01(input::String = readInput(joinpath(@__DIR__, "..", "data", "day01.txt")))
     data = parse_input(input)
     sorted_sums = map(x -> sum(x), data) |> sort
-    p1 = sorted_sums[end]
-    p2 = sorted_sums[end-2:end] |> sum
-    return [p1, p2]
+    return [sorted_sums[end], sorted_sums[end-2:end] |> sum]
 end
 
 function parse_input(input::AbstractString)
