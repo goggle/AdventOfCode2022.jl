@@ -25,7 +25,7 @@ Platform Info:
 
 ## Installation and Usage
 
-Make sure you have [Julia 1.5 or newer](https://julialang.org/downloads/)
+Make sure you have [Julia 1.8 or newer](https://julialang.org/downloads/)
 installed on your system.
 
 
@@ -34,7 +34,7 @@ installed on your system.
 Start Julia and enter the package REPL by typing `]`. Create a new
 environment:
 ```julia
-(@v1.5) pkg> activate aoc
+(@v1.8) pkg> activate aoc
 ```
 
 Install `AdventOfCode2022.jl`:
