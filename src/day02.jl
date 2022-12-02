@@ -10,14 +10,7 @@ function day02(input::String = readInput(joinpath(@__DIR__, "..", "data", "day02
 end
 
 function play_round(opp::Char, me::Char)
-    s = 0
-    if me == 'X'
-        s = 1
-    elseif me == 'Y'
-        s = 2
-    elseif me == 'Z'
-        s = 3
-    end
+    s = me - 'X' + 1
     opp == 'A' && me == 'X' && return 3 + s
     opp == 'B' && me == 'Y' && return 3 + s
     opp == 'C' && me == 'Z' && return 3 + s
