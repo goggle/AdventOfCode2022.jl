@@ -10,6 +10,7 @@ This Julia package contains my solutions for [Advent of Code 2022](https://adven
 | Day | Problem | Time | Allocated memory | Source |
 |----:|:-------:|-----:|-----------------:|:------:|
 | 1 | [:white_check_mark:](https://adventofcode.com/2022/day/1) | 603.795 μs | 231.53 KiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day01.jl) |
+| 2 | [:white_check_mark:](https://adventofcode.com/2022/day/2) | 1.838 ms | 1.09 MiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day02.jl) |
 
 
 The benchmarks have been measured on this machine:
