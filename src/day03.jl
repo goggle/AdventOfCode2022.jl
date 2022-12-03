@@ -9,9 +9,6 @@ function day03(input::String = readInput(joinpath(@__DIR__, "..", "data", "day03
     return [score.(citems_p1) |> sum, score.(citems_p2) |> sum]
 end
 
-function score(item::Char)
-    islowercase(item) && return item - 'a' + 1
-    return item - 'A' + 27
-end
+score(x::Char) = islowercase(x) ? x - 'a' + 1 : x - 'A' + 27
 
 end # module
