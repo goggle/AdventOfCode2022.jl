@@ -32,7 +32,7 @@ end
 function part1!(crates::Dict{Int,Vector{Char}}, instructions::Vector{Vector{Int}})
     for instruction ∈ instructions
         times, from, to = instruction
-        for i = 1:times
+        for _ = 1:times
             push!(crates[to], pop!(crates[from]))
         end
     end
