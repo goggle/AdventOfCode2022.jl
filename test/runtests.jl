@@ -69,3 +69,25 @@ end
     @test AdventOfCode2022.Day08.day08(sample) == [21, 8]
     @test AdventOfCode2022.Day08.day08() == [1818, 368368]
 end
+
+@testset "Day 9" begin
+    sample = "R 4\n" *
+             "U 4\n" *
+             "L 3\n" *
+             "D 1\n" *
+             "R 4\n" *
+             "D 1\n" *
+             "L 5\n" *
+             "R 2\n"
+    sample2 = "R 5\n" *
+              "U 8\n" *
+              "L 8\n" *
+              "D 3\n" *
+              "R 17\n" *
+              "D 10\n" *
+              "L 25\n" *
+              "U 20\n"
+    @test AdventOfCode2022.Day09.day09(sample) == [13, 1]
+    @test AdventOfCode2022.Day09.day09(sample2) == [88, 36]
+    @test AdventOfCode2022.Day09.day09() == [5907, 2303]
+end
