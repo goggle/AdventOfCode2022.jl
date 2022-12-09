@@ -1,7 +1,6 @@
 module Day09
 
 using AdventOfCode2022
-using SparseArrays
 
 function day09(input::String = readInput(joinpath(@__DIR__, "..", "data", "day09.txt")))
     data = map(x -> (x[1][1], parse(Int, x[2])), split.(eachsplit(rstrip(input), "\n")))
