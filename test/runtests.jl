@@ -281,3 +281,13 @@ end
     @test AdventOfCode2022.Day11.day11(sample) == [10605, 2713310158]
     @test AdventOfCode2022.Day11.day11() == [110888, 25590400731]
 end
+
+@testset "Day 12" begin
+    sample = "Sabqponm\n" *
+             "abcryxxl\n" *
+             "accszExk\n" *
+             "acctuvwj\n" *
+             "abdefghi\n"
+    @test AdventOfCode2022.Day12.day12(sample) == [31, 29]
+    @test AdventOfCode2022.Day12.day12() == [420, 414]
+end
