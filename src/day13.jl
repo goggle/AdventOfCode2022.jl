@@ -22,23 +22,17 @@ function part1(pairs)
 end
 
 function part2(packets)
-    sorted = Any[[[2]], [[6]]]
+    divider1, divider2 = [[2]], [[6]]
+    n_packets_before_divider1, n_packets_before_divider2 = 0, 1
     for packet ∈ packets
-        for (i, sp) ∈ enumerate(sorted)
-            res = compare(packet, sp)
-            if res == -1
-                insert!(sorted, i, packet)
-                break
-            end
-            if i == length(sorted) && res != -1
-                insert!(sorted, i+1, packet)
-                break
-            end
+        if compare(packet, divider1) == -1
+            n_packets_before_divider1 += 1
+            n_packets_before_divider2 += 1
+        elseif compare(packet, divider2) == -1
+            n_packets_before_divider2 += 1
         end
     end
-    ind1 = findfirst(x -> x==[[2]], sorted)
-    ind2 = findfirst(x -> x==[[6]], sorted)
-    return ind1 * ind2
+    return (n_packets_before_divider1 + 1) * (n_packets_before_divider2 + 1)
 end
 
 function compare(left, right)
