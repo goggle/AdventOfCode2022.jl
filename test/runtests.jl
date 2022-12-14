@@ -319,3 +319,10 @@ end
     @test AdventOfCode2022.Day13.day13(sample) == [13, 140]
     @test AdventOfCode2022.Day13.day13() == [5659, 22110]
 end
+
+@testset "Day 14" begin
+    sample = "498,4 -> 498,6 -> 496,6\n" *
+             "503,4 -> 502,4 -> 502,9 -> 494,9\n"
+    @test AdventOfCode2022.Day14.day14(sample) == [24, 93]
+    @test AdventOfCode2022.Day14.day14() == [793, 24166]
+end
