@@ -13,8 +13,7 @@ end
 function part1(pairs)
     total = 0
     for (i, (l, r)) ∈ enumerate(pairs)
-        result = compare(l, r)
-        if result == -1
+        if l < r
             total += i
         end
     end
@@ -25,44 +24,20 @@ function part2(packets)
     divider1, divider2 = [[2]], [[6]]
     n_packets_before_divider1, n_packets_before_divider2 = 0, 1
     for packet ∈ packets
-        if compare(packet, divider1) == -1
+        if packet < divider1
             n_packets_before_divider1 += 1
             n_packets_before_divider2 += 1
-        elseif compare(packet, divider2) == -1
+        elseif packet < divider2
             n_packets_before_divider2 += 1
         end
     end
     return (n_packets_before_divider1 + 1) * (n_packets_before_divider2 + 1)
 end
 
-function compare(left, right)
-    if isa(left, Vector) && isa(right, Vector)
-        m = min(length(left), length(right))
-        for (l, r) ∈ zip(left[1:m], right[1:m])
-            result = compare(l, r)
-            if result ∈ (-1, 1)
-                return result
-            end
-        end
-        length(left) < length(right) && return -1
-        length(left) > length(right) && return 1
-        length(left) == length(right) && return 0
-    elseif isa(left, Vector)
-        return compare(left, [right])
-    else
-        return compare([left], right)
-    end
-end
-
-function compare(left::Int, right::Int)
-    if left < right
-        return -1
-    elseif right < left
-        return 1
-    else
-        return 0
-    end
-end
+Base.isless(l::Int, r::AbstractVector) = [l] < r
+Base.isequal(l::Int, r::AbstractVector) = isequal([l], r)
+Base.isless(l::AbstractVector, r::Int) = l < [r]
+Base.isequal(l::AbstractVector, r::Int) = isequal(l, [r])
 
 function parse_input(input::AbstractString)
     pairs = []
