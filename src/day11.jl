@@ -1,13 +1,13 @@
 module Day11
 
 using AdventOfCode2022
+using DataStructures
 
 struct Monkey
     id::Int
-    items::Vector{Int}
-    op1::String
-    op2::Union{String,Int}
-    operator
+    items::Queue{Int}
+    opc::Char
+    update::Function
     divisible::Int
     true_throw_id::Int
     false_throw_id::Int
@@ -42,16 +42,16 @@ function play_round!(monkeys::Vector{Monkey}, processed::Vector{Int}, divide_by;
     for monkey ∈ monkeys
         for _ = 1:length(monkey.items)
             processed[monkey.id + 1] += 1
-            worry_level = popfirst!(monkey.items)
-            worry_level = operation(monkey, worry_level)
+            worry_level = dequeue!(monkey.items)
+            worry_level = monkey.update(worry_level)
             worry_level ÷= divide_by
-            if divprod != 0 && monkey.operator == *
+            if divprod != 0 && monkey.opc == '*'
                 worry_level = mod(worry_level, divprod)
             end
             if mod(worry_level, monkey.divisible) == 0
-                push!(monkeys[monkey.true_throw_id+1].items, worry_level)
+                enqueue!(monkeys[monkey.true_throw_id+1].items, worry_level)
             else
-                push!(monkeys[monkey.false_throw_id+1].items, worry_level)
+                enqueue!(monkeys[monkey.false_throw_id+1].items, worry_level)
             end
         end
     end
@@ -59,32 +59,40 @@ function play_round!(monkeys::Vector{Monkey}, processed::Vector{Int}, divide_by;
 end
 
 function parse_input(input::AbstractString)
-    blocks = split(rstrip(input), "\n\n")
     data = Monkey[]
-    for block ∈ blocks
+    for block ∈ eachsplit(rstrip(input), "\n\n")
         lines = split(block, "\n")
         id = parse(Int, match(r"Monkey\s+(\d+)\:", lines[1]).captures[1])
         numbers_match = match(r"\s*Starting\s+items\:\s+(.+)$", lines[2])
-        items = parse.(Int, split(numbers_match.captures[1], ","))
+        items = Queue{Int}()
+        for elem ∈ reverse(parse.(Int, split(numbers_match.captures[1], ",")))
+            enqueue!(items, elem)
+        end
         opm = match(r"\s+Operation\:\s+new\s+=\s+(\w+|\d+)\s+(\*|\+)\s+(\w+|\d+)", lines[3])
-        op1 = opm.captures[1] |> String
         op2 = opm.captures[3] |> String
         tpop2 = tryparse(Int, op2)
         if tpop2 !== nothing
             op2 = tpop2
         end
-        if opm.captures[2] == "*"
-            operator = *
+
+        opc = opm.captures[2][1]
+        if opc == '*'
+            if isa(op2, Int)
+                update = x::Int -> x * op2
+            else
+                update = x::Int -> x * x
+            end
         else
-            operator = +
+            update = x::Int -> x + op2
         end
+
         divm = match(r"Test\:\s+divisible\s+by\s+(\d+)", lines[4])
         divisible = parse(Int, divm.captures[1])
         truem = match(r"\s+If\s+true\:\s+throw\s+to\s+monkey\s+(\d+)", lines[5])
         true_throw_id = parse(Int, truem.captures[1])
         falsem = match(r"\s+If\s+false\:\s+throw\s+to\s+monkey\s+(\d+)", lines[6])
         false_throw_id = parse(Int, falsem.captures[1])
-        push!(data, Monkey(id, items, op1, op2, operator, divisible, true_throw_id, false_throw_id))
+        push!(data, Monkey(id, items, opc, update, divisible, true_throw_id, false_throw_id))
     end
     return data
 end
