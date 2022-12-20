@@ -330,3 +330,18 @@ end
 @testset "Day 15" begin
     @test AdventOfCode2022.Day15.day15() == [5166077, 13071206703981]
 end
+
+@testset "Day 16" begin
+    sample = "Valve AA has flow rate=0; tunnels lead to valves DD, II, BB\n" *
+             "Valve BB has flow rate=13; tunnels lead to valves CC, AA\n" *
+             "Valve CC has flow rate=2; tunnels lead to valves DD, BB\n" *
+             "Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE\n" *
+             "Valve EE has flow rate=3; tunnels lead to valves FF, DD\n" *
+             "Valve FF has flow rate=0; tunnels lead to valves EE, GG\n" *
+             "Valve GG has flow rate=0; tunnels lead to valves FF, HH\n" *
+             "Valve HH has flow rate=22; tunnel leads to valve GG\n" *
+             "Valve II has flow rate=0; tunnels lead to valves AA, JJ\n" *
+             "Valve JJ has flow rate=21; tunnel leads to valve II\n"
+    @test AdventOfCode2022.Day16.day16(sample) == [1651, 1707]
+    @test AdventOfCode2022.Day16.day16() == [1792, 2587]
+end
