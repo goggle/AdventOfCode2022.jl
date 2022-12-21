@@ -351,3 +351,21 @@ end
     @test AdventOfCode2022.Day17.day17(sample) == [3068, 1514285714288]
     @test AdventOfCode2022.Day17.day17() == [3071, 1523615160362]
 end
+
+@testset "Day 18" begin
+    sample = "2,2,2\n" *
+             "1,2,2\n" *
+             "3,2,2\n" *
+             "2,1,2\n" *
+             "2,3,2\n" *
+             "2,2,1\n" *
+             "2,2,3\n" *
+             "2,2,4\n" *
+             "2,2,6\n" *
+             "1,2,5\n" *
+             "3,2,5\n" *
+             "2,1,5\n" *
+             "2,3,5\n"
+    @test AdventOfCode2022.Day18.day18(sample) == [64, 58]
+    @test AdventOfCode2022.Day18.day18() == [4302, 2492]
+end
