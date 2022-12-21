@@ -369,3 +369,16 @@ end
     @test AdventOfCode2022.Day18.day18(sample) == [64, 58]
     @test AdventOfCode2022.Day18.day18() == [4302, 2492]
 end
+
+
+@testset "Day 20" begin
+    sample = "1\n" *
+             "2\n" *
+             "-3\n" *
+             "3\n" *
+             "-2\n" *
+             "0\n" *
+             "4\n"
+    @test AdventOfCode2022.Day20.day20(sample) == [3, 1623178306]
+    @test AdventOfCode2022.Day20.day20() == [13883, 19185967576920]
+end
