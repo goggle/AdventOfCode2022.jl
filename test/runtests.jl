@@ -345,3 +345,9 @@ end
     @test AdventOfCode2022.Day16.day16(sample) == [1651, 1707]
     @test AdventOfCode2022.Day16.day16() == [1792, 2587]
 end
+
+@testset "Day 17" begin
+    sample = ">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>"
+    @test AdventOfCode2022.Day17.day17(sample) == [3068, 1514285714288]
+    @test AdventOfCode2022.Day17.day17() == [3071, 1523615160362]
+end
