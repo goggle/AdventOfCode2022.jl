@@ -382,3 +382,23 @@ end
     @test AdventOfCode2022.Day20.day20(sample) == [3, 1623178306]
     @test AdventOfCode2022.Day20.day20() == [13883, 19185967576920]
 end
+
+@testset "Day 21" begin
+    sample = "root: pppw + sjmn\n" *
+             "dbpl: 5\n" *
+             "cczh: sllz + lgvd\n" *
+             "zczc: 2\n" *
+             "ptdq: humn - dvpt\n" *
+             "dvpt: 3\n" *
+             "lfqf: 4\n" *
+             "humn: 5\n" *
+             "ljgn: 2\n" *
+             "sjmn: drzm * dbpl\n" *
+             "sllz: 4\n" *
+             "pppw: cczh / lfqf\n" *
+             "lgvd: ljgn * ptdq\n" *
+             "drzm: hmdt - zczc\n" *
+             "hmdt: 32\n"
+    @test AdventOfCode2022.Day21.day21(sample) == [152, 301]
+    @test AdventOfCode2022.Day21.day21() == [10037517593724, 3272260914328]
+end
