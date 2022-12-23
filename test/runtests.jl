@@ -402,3 +402,7 @@ end
     @test AdventOfCode2022.Day21.day21(sample) == [152, 301]
     @test AdventOfCode2022.Day21.day21() == [10037517593724, 3272260914328]
 end
+
+@testset "Day 22" begin
+    @testset AdventOfCode2022.Day22.day22() == [155060, 3479]
+end
