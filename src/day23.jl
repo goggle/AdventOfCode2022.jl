@@ -78,19 +78,14 @@ function round!(elves::Set{CartesianIndex{2}}, roundnumber::Int)
 end
 
 function considers_moving(s::Set{CartesianIndex{2}}, c::CartesianIndex{2})
-    off = (
-        CartesianIndex(-1, -1),
-        CartesianIndex(-1, 0),
-        CartesianIndex(-1, 1),
-        CartesianIndex(0, -1),
-        CartesianIndex(0, 1),
-        CartesianIndex(1, -1),
-        CartesianIndex(1, 0),
-        CartesianIndex(1, 1)
-    )
-    for cs ∈ off
-        cs + c ∈ s && return true
-    end
+    c + CartesianIndex(-1, -1) ∈ s && return true
+    c + CartesianIndex(-1, 0) ∈ s && return true
+    c + CartesianIndex(-1, 1) ∈ s && return true
+    c + CartesianIndex(0, -1) ∈ s && return true
+    c + CartesianIndex(0, 1) ∈ s && return true
+    c + CartesianIndex(1, -1) ∈ s && return true
+    c + CartesianIndex(1, 0) ∈ s && return true
+    c + CartesianIndex(1, 1) ∈ s && return true
     return false
 end
 
