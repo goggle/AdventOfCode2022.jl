@@ -406,3 +406,15 @@ end
 @testset "Day 22" begin
     @testset AdventOfCode2022.Day22.day22() == [155060, 3479]
 end
+
+@testset "Day 23" begin
+    sample = "....#..\n" *
+             "..###.#\n" *
+             "#...#.#\n" *
+             ".#...##\n" *
+             "#.###..\n" *
+             "##.#.##\n" *
+             ".#..#..\n"
+    @test AdventOfCode2022.Day23.day23(sample) == [110, 20]
+    @test AdventOfCode2022.Day23.day23() == [4195, 1069]
+end
