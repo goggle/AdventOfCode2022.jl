@@ -418,3 +418,14 @@ end
     @test AdventOfCode2022.Day23.day23(sample) == [110, 20]
     @test AdventOfCode2022.Day23.day23() == [4195, 1069]
 end
+
+@testset "Day 24" begin
+    sample = "#.######\n" *
+             "#>>.<^<#\n" *
+             "#.<..<<#\n" *
+             "#>v.><>#\n" *
+             "#<^v^^>#\n" *
+             "######.#\n"
+    @test AdventOfCode2022.Day24.day24(sample) == [18, 54]
+    @test AdventOfCode2022.Day24.day24() == [240, 717]
+end
