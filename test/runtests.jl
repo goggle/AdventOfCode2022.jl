@@ -450,6 +450,6 @@ end
              "12\n" *
              "1=\n" *
              "122\n"
-    @test AdventOfCode.Day25.day25(sample) == "2=-1=0"
-    @test AdventOfCode.Day25.day25() == "2--1=0=-210-1=00=-=1"
+    @test AdventOfCode2022.Day25.day25(sample) == "2=-1=0"
+    @test AdventOfCode2022.Day25.day25() == "2--1=0=-210-1=00=-=1"
 end
