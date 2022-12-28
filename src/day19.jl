@@ -56,7 +56,7 @@ function solve(time_left::Int8,
     #
     #  * Estimate the maximum amount of geode by assuming that we can build
     #    a geode robot at each time step. If that estimation is less or equal
-    #    than the currently known maximal amount of geode, we do not have
+    #    than the currently known maximal amount of geode, we do not have to
     #    further investigate that branch.
     #  * If we choose to wait (and not build a robot, but could have built it),
     #    do not build that robot in the next turn either.
