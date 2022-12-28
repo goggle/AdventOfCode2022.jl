@@ -373,6 +373,8 @@ end
 @testset "Day 19" begin
     sample = "Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.\n" *
              "Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian."
+    @test AdventOfCode2022.Day19.day19(sample) == [33, 3472]
+    @test AdventOfCode2022.Day19.day19() == [1616, 8990]
 end
 
 @testset "Day 20" begin
@@ -432,4 +434,20 @@ end
              "######.#\n"
     @test AdventOfCode2022.Day24.day24(sample) == [18, 54]
     @test AdventOfCode2022.Day24.day24() == [240, 717]
+end
+
+@testset "Day 25" begin
+    sample = "1=-0-2\n" *
+             "12111\n" *
+             "2=0=\n" *
+             "21\n" *
+             "2=01\n" *
+             "111\n" *
+             "20012\n" *
+             "112\n" *
+             "1=-1=\n" *
+             "1-12\n" *
+             "12\n" *
+             "1=\n" *
+             "122\n"
 end
