@@ -16,7 +16,7 @@ function day16(input::String = readInput(joinpath(@__DIR__, "..", "data", "day16
     for (k1, v1) ∈ scores
         v1 < test_value && continue
         for (k2, v2) ∈ scores
-            if k1 & k2 == 0
+            if k1 & k2 == 0  # set of opened valve indices are disjoint
                 if p2 < v1 + v2
                     p2 = v1 + v2
                 end 
@@ -28,6 +28,9 @@ end
 
 function part1(walking_dists::Matrix{Int}, positive_flow_mask::BitVector, dists::Matrix{Int}, flows::Vector{Int}, startidx::Int, starttime::Int, available::Set{UInt8}, scores::Dict{Int,Int}; store_scores = false)
     q = Deque{Tuple{Int,Int,Int,Set{UInt8}}}()
+
+    # Initialization of the search: Walk to all the valves with positive pressure
+    # release, open them, and add these states to the queue.
     for i ∈ findall(flows .> 0)
         idx = (flows .> 0)[1:i] |> sum
         idx ∉ available && continue
@@ -42,6 +45,9 @@ function part1(walking_dists::Matrix{Int}, positive_flow_mask::BitVector, dists:
         time_left, score, idx, open_idx = popfirst!(q)
 
         if store_scores
+            # Generate a key from the set of opened valve indices that can
+            # be used to store the best score for this configuration in
+            # a dictionary (only needed for part 2).
             key = 0
             for j ∈ open_idx
                 key += 1 << j
@@ -59,14 +65,17 @@ function part1(walking_dists::Matrix{Int}, positive_flow_mask::BitVector, dists:
             max_score = score
         end
 
+        # Some pruning: If we certainly won't reach a better score than the
+        # current best score, do not investigate further branches.
         sc = score
         for i ∈ setdiff(available, open_idx) |> collect
             tl = time_left - dists[idx, i] - 1
-            tl < 0 && continue
+            tl <= 0 && continue
             sc += tl * flows[positive_flow_mask][i]
         end
         sc < max_score && continue
 
+        # Choose next valve to open and add these new states to the queue.
         for i ∈ axes(dists, 1)
             (i ∈ open_idx || i ∉ available) && continue
             tl = time_left - dists[idx, i] - 1
