@@ -23,7 +23,7 @@ This Julia package contains my solutions for [Advent of Code 2022](https://adven
 | 12 | [:white_check_mark:](https://adventofcode.com/2022/day/12) | 623.635 μs | 1.02 MiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day12.jl) |
 | 13 | [:white_check_mark:](https://adventofcode.com/2022/day/13) | 4.571 ms | 2.31 MiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day13.jl) |
 | 14 | [:white_check_mark:](https://adventofcode.com/2022/day/14) | 81.430 ms | 2.48 MiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day14.jl) |
-| 15 | [:white_check_mark:](https://adventofcode.com/2022/day/15) | 30.348 ms | 719.27 KiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day15.jl) |
+| 15 | [:white_check_mark:](https://adventofcode.com/2022/day/15) | 27.526 ms | 191.84 KiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day15.jl) |
 | 16 | [:white_check_mark:](https://adventofcode.com/2022/day/16) | 51.303 ms | 70.11 MiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day16.jl) |
 | 17 | [:white_check_mark:](https://adventofcode.com/2022/day/17) | 842.701 ms | 574.77 MiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day17.jl) |
 | 18 | [:white_check_mark:](https://adventofcode.com/2022/day/18) | 6.194 ms | 2.94 MiB | [:white_check_mark:](https://github.com/goggle/AdventOfCode2022.jl/blob/master/src/day18.jl) |

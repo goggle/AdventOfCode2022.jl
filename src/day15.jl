@@ -7,7 +7,7 @@ function day15(input::String = readInput(joinpath(@__DIR__, "..", "data", "day15
     return [part1(sensors, beacons; y=2_000_000), part2(sensors, beacons)]
 end
 
-function part1(sensors, closest_beacons; y=10)
+function part1(sensors::Vector{Tuple{Int,Int}}, closest_beacons::Vector{Tuple{Int,Int}}; y=10)
     distances = [manhatten(s..., b...) for (s, b) ∈ zip(sensors, closest_beacons)]
     ranges = Set{UnitRange{Int}}()
     for (sensor, r) ∈ zip(sensors, distances)
@@ -21,14 +21,14 @@ function part1(sensors, closest_beacons; y=10)
     return total
 end
 
-function part2(sensors, closest_beacons)
+function part2(sensors::Vector{Tuple{Int,Int}}, closest_beacons::Vector{Tuple{Int,Int}})
     distances = [manhatten(s..., b...) for (s, b) ∈ zip(sensors, closest_beacons)]
 
     # Idea:
     # Calculate lines along the edges of the Manhatten sphere of each sphere.
     # These lines have either slope +1 or -1.
     # It is enough to store their y-intercepts (b1, b2, b3, b4).
-    lines = []
+    lines = NTuple{4,Int}[]
     for ((x, y), d) ∈ zip(sensors, distances)
         b1 = y - x - d
         b2 = y - x + d
@@ -70,7 +70,7 @@ function part2(sensors, closest_beacons)
     end
 end
 
-admissible(x::Number, y::Number) = 0 <= x <= 4_000_000 && 0 <= y <= 4_000_000
+admissible(x::Int, y::Int) = 0 <= x <= 4_000_000 && 0 <= y <= 4_000_000
 manhatten(x1::Int, y1::Int, x2::Int, y2::Int) = abs(x1-x2) + abs(y1-y2)
 
 function non_available_x_ranges(sx::Int, sy::Int, r::Int, y0::Int)
