@@ -9,16 +9,14 @@ mutable struct CircularList
 end
 
 function day20(input::String = readInput(joinpath(@__DIR__, "..", "data", "day20.txt")))
-    cl, initial_order = parse_input(input)
+    cl, initial_order, zero = parse_input(input)
     shuffle!(initial_order)
-    zero = find_zero(cl)
     p1 = get_grove_number(zero, length(initial_order))
 
-    cl, initial_order = parse_input(input; decryption_key=811589153)
+    cl, initial_order, zero = parse_input(input; decryption_key=811589153)
     for _ ∈ 1:10
         shuffle!(initial_order)
     end
-    zero = find_zero(cl)
     p2 = get_grove_number(zero, length(initial_order))
 
     return [p1, p2]
@@ -26,21 +24,14 @@ end
 
 function get_grove_number(zero::CircularList, capacity::Int)
     nsteps = mod(1000, capacity)
-    coords = Int[]
+    grove = 0
     for _ ∈ 1:3
         for _ ∈ 1:nsteps
             zero = zero.next
         end
-        push!(coords, zero.value)
+        grove += zero.value
     end
-    return coords |> sum
-end
-
-function find_zero(cl::CircularList)
-    while cl.value != 0
-        cl = cl.next
-    end
-    return cl
+    return grove
 end
 
 function shuffle!(initial_order::Vector{CircularList})
@@ -68,8 +59,12 @@ end
 function parse_input(input; decryption_key=1)
     numbers = parse.(Int, split(rstrip(input), "\n")) .* decryption_key
     circ = [CircularList(number, nothing, nothing) for number ∈ numbers]
+    zero = circ[end]
     for i ∈ axes(circ,1)[1:end-1]
         circ[i].next = circ[i+1]
+        if circ[i].value == 0
+            zero = circ[i]
+        end
     end
     circ[end].next = circ[1]
     circ[1].prev = circ[end]
@@ -77,7 +72,7 @@ function parse_input(input; decryption_key=1)
         circ[i].prev = circ[i-1]
     end
 
-    return circ[1], circ
+    return circ[1], circ, zero
 end
 
 end # module
