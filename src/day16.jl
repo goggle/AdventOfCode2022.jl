@@ -2,28 +2,31 @@ module Day16
 
 using AdventOfCode2022
 using DataStructures
-using Combinatorics
 
 function day16(input::String = readInput(joinpath(@__DIR__, "..", "data", "day16.txt")))
     valves, flows, startidx = parse_input(input)
     walking_dists = walking_distances(valves)
     positive_flow_mask = flows .> 0
     dists = walking_dists[positive_flow_mask, positive_flow_mask]
-    p1 = part1(walking_dists, positive_flow_mask, dists, flows, startidx, 30, Set{UInt8}(1:count(flows .> 0)))
+    p1, _ = part1(walking_dists, positive_flow_mask, dists, flows, startidx, 30, Set{UInt8}(1:count(flows .> 0)), Dict{Int,Int}())
 
     p2 = 0
-    for p ∈ partitions(UInt8(1):UInt8(count(flows.>0)),2)
-        abs(length(p[1]) - length(p[2])) > 1 && continue
-        m = part1(walking_dists, positive_flow_mask, dists, flows, startidx, 26, Set{UInt8}(p[1])) + 
-            part1(walking_dists, positive_flow_mask, dists, flows, startidx, 26, Set{UInt8}(p[2]))
-        if m > p2
-            p2 = m
+    _, scores = part1(walking_dists, positive_flow_mask, dists, flows, startidx, 26, Set{UInt8}(1:count(flows .> 0)), Dict{Int,Int}(); store_scores = true)
+    test_value = p1 ÷ 2
+    for (k1, v1) ∈ scores
+        v1 < test_value && continue
+        for (k2, v2) ∈ scores
+            if k1 & k2 == 0
+                if p2 < v1 + v2
+                    p2 = v1 + v2
+                end 
+            end
         end
     end
     return [p1, p2]
 end
 
-function part1(walking_dists::Matrix{Int}, positive_flow_mask::BitVector, dists::Matrix{Int}, flows::Vector{Int}, startidx::Int, starttime::Int, available::Set{UInt8})
+function part1(walking_dists::Matrix{Int}, positive_flow_mask::BitVector, dists::Matrix{Int}, flows::Vector{Int}, startidx::Int, starttime::Int, available::Set{UInt8}, scores::Dict{Int,Int}; store_scores = false)
     q = Deque{Tuple{Int,Int,Int,Set{UInt8}}}()
     for i ∈ findall(flows .> 0)
         idx = (flows .> 0)[1:i] |> sum
@@ -37,9 +40,33 @@ function part1(walking_dists::Matrix{Int}, positive_flow_mask::BitVector, dists:
     max_score = 0
     while !isempty(q)
         time_left, score, idx, open_idx = popfirst!(q)
+
+        if store_scores
+            key = 0
+            for j ∈ open_idx
+                key += 1 << j
+            end
+            if haskey(scores, key)
+                if score > scores[key]
+                    scores[key] = score
+                end
+            else
+                scores[key] = score
+            end
+        end
+
         if score > max_score
             max_score = score
         end
+
+        sc = score
+        for i ∈ setdiff(available, open_idx) |> collect
+            tl = time_left - dists[idx, i] - 1
+            tl < 0 && continue
+            sc += tl * flows[positive_flow_mask][i]
+        end
+        sc < max_score && continue
+
         for i ∈ axes(dists, 1)
             (i ∈ open_idx || i ∉ available) && continue
             tl = time_left - dists[idx, i] - 1
@@ -50,7 +77,7 @@ function part1(walking_dists::Matrix{Int}, positive_flow_mask::BitVector, dists:
             push!(q, (tl, sc, i, opidx))
         end
     end
-    return max_score
+    return max_score, scores
 end
 
 function walking_distances(valves::Dict{Int,Vector{Int}})
