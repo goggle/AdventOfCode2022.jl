@@ -7,14 +7,14 @@ function day09(input::String = readInput(joinpath(@__DIR__, "..", "data", "day09
     return [solve(data, 2), solve(data, 10)]
 end
 
-function solve(data::Vector{Tuple{Char,Int}}, nknots::Int)
-    visited = Set{Tuple{Int,Int}}()
-    coordinates = [[0, 0] for _ = 1:nknots]
+function solve(data::Vector{Tuple{Char, Int}}, nknots::Int)
+    visited = Set{Tuple{Int, Int}}()
+    coordinates = [[0, 0] for _ ∈ 1:nknots]
     push!(visited, (0, 0))
     for (dir, nsteps) ∈ data
-        for _ = 1:nsteps
+        for _ ∈ 1:nsteps
             coordinates[1] .= move_head(dir, coordinates[1]...)
-            for k = 2:length(coordinates)
+            for k ∈ 2:length(coordinates)
                 coordinates[k] .= move_tail(coordinates[k-1]..., coordinates[k]...)
             end
             push!(visited, (coordinates[end][1], coordinates[end][2]))
