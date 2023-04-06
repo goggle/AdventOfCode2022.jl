@@ -23,25 +23,25 @@ end
 function part1(monkeys::Vector{Monkey})
     processed = zeros(Int, length(monkeys))
     monkeys = deepcopy(monkeys)
-    for _ = 1:20
+    for _ ∈ 1:20
         play_round!(monkeys, processed, 3)
     end
-    return sort(processed, rev=true)[1:2] |> prod
+    return sort(processed, rev = true)[1:2] |> prod
 end
 
 function part2!(monkeys::Vector{Monkey})
     processed = zeros(Int, length(monkeys))
     divprod = prod(m.divisible for m ∈ monkeys)
-    for _ = 1:10_000
-        play_round!(monkeys, processed, 1, divprod=divprod)
+    for _ ∈ 1:10_000
+        play_round!(monkeys, processed, 1, divprod = divprod)
     end
-    return sort(processed, rev=true)[1:2] |> prod
+    return sort(processed, rev = true)[1:2] |> prod
 end
 
 function play_round!(monkeys::Vector{Monkey}, processed::Vector{Int}, divide_by; divprod = 0)
     for monkey ∈ monkeys
-        for _ = 1:length(monkey.items)
-            processed[monkey.id + 1] += 1
+        for _ ∈ 1:length(monkey.items)
+            processed[monkey.id+1] += 1
             worry_level = dequeue!(monkey.items)
             worry_level = monkey.update(worry_level)
             worry_level ÷= divide_by
