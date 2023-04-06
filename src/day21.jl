@@ -3,7 +3,7 @@ module Day21
 using AdventOfCode2022
 
 struct Node
-    content::Union{Tuple{Union{Int,String,Node},Union{Int,String,Node},Char},Int,String}
+    content::Union{Tuple{Union{Int, String, Node}, Union{Int, String, Node}, Char}, Int, String}
 end
 
 function day21(input::String = readInput(joinpath(@__DIR__, "..", "data", "day21.txt")))
@@ -22,7 +22,7 @@ function day21(input::String = readInput(joinpath(@__DIR__, "..", "data", "day21
     return [p1, p2]
 end
 
-function part1!(number_monkeys::Dict{String,Node}, math_monkeys::Dict{String,Node})
+function part1!(number_monkeys::Dict{String, Node}, math_monkeys::Dict{String, Node})
     operator = Dict('*' => mul, '/' => div, '+' => add, '-' => sub)
     while !isempty(math_monkeys)
         ks = keys(math_monkeys)
@@ -44,9 +44,9 @@ function resolve(left::Node, right::Node)
         eq1 = equation.content[1]
         eq2 = equation.content[2]
         op = equation.content[3]
-        case = isa(eq1.content,Int) ? 1 : 2
-        n = isa(eq1.content,Int) ? eq1.content : eq2.content
-        eq = isa(eq1.content,Int) ? eq2 : eq1
+        case = isa(eq1.content, Int) ? 1 : 2
+        n = isa(eq1.content, Int) ? eq1.content : eq2.content
+        eq = isa(eq1.content, Int) ? eq2 : eq1
         if op == '*'
             number ÷= n
         elseif op == '/'
@@ -70,11 +70,11 @@ mul(x::Node, y::Node) = isa(x.content, Int) && isa(y.content, Int) ? Node(x.cont
 div(x::Node, y::Node) = isa(x.content, Int) && isa(y.content, Int) ? Node(x.content ÷ y.content) : Node((x, y, '/'))
 
 function parse_input(input::AbstractString)
-    number_monkeys = Dict{String,Node}()
-    math_monkeys = Dict{String,Node}()
+    number_monkeys = Dict{String, Node}()
+    math_monkeys = Dict{String, Node}()
     for line ∈ eachsplit(rstrip(input), "\n")
         spline = split(line, " ")
-        name = chop(spline[1], tail=1)
+        name = chop(spline[1], tail = 1)
         if length(spline) == 2
             number = parse(Int, spline[2])
             number_monkeys[name] = Node(number)
