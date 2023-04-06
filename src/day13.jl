@@ -57,7 +57,7 @@ end
 function recparse(line::AbstractString, i::Int, obj)
     while line[i] != ']'
         if line[i] == '['
-            i, nobj = recparse(line, i+1, [])
+            i, nobj = recparse(line, i + 1, [])
             push!(obj, nobj)
             i > length(line) && return i, obj
         end
@@ -66,7 +66,7 @@ function recparse(line::AbstractString, i::Int, obj)
             while isnumeric(line[j]) || line[j] == ','
                 j += 1
             end
-            numbers = parse.(Int, split(line[i:j-1], ",", keepempty=false))
+            numbers = parse.(Int, split(line[i:j-1], ",", keepempty = false))
             push!(obj, numbers...)
             i = j - 1
         end
@@ -75,7 +75,7 @@ function recparse(line::AbstractString, i::Int, obj)
             return i, obj
         end
     end
-    return i+1, obj
+    return i + 1, obj
 end
 
 end # module
