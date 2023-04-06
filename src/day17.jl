@@ -5,9 +5,9 @@ using AdventOfCode2022
 function day17(input::String = readInput(joinpath(@__DIR__, "..", "data", "day17.txt")))
     instructions = rstrip(input)
     shapes = (fill(true, 1, 4), Bool[0 1 0; 1 1 1; 0 1 0], Bool[0 0 1; 0 0 1; 1 1 1], fill(true, 4, 1), fill(true, 2, 2))
-    diffs = part1(instructions, shapes, n=2500)
+    diffs = part1(instructions, shapes, n = 2500)
     p1 = sum(diffs[1:2022])
-    cs = findall([all(diffs[101:101+200] .== diffs[i+100:i+100+200]) for i = 1:2200])
+    cs = findall([all(diffs[101:101+200] .== diffs[i+100:i+100+200]) for i ∈ 1:2200])
     cycle = cs[2] - cs[1]
     heightincrease = diffs[300:300+cycle] |> sum
 
@@ -18,7 +18,7 @@ function day17(input::String = readInput(joinpath(@__DIR__, "..", "data", "day17
     return [p1, p2]
 end
 
-function part1(instructions::AbstractString, shapes::NTuple{5,Matrix{Bool}}; n=2022)
+function part1(instructions::AbstractString, shapes::NTuple{5, Matrix{Bool}}; n = 2022)
     board = zeros(Bool, n * 4, 7)
     board[end, :] .= true
 
@@ -54,7 +54,7 @@ function part1(instructions::AbstractString, shapes::NTuple{5,Matrix{Bool}}; n=2
     return diffs
 end
 
-highest_rock(b::Matrix{Bool}) = minimum(minimum(findall(b[:,i])) for i ∈ axes(b, 2))
+highest_rock(b::Matrix{Bool}) = minimum(minimum(findall(b[:, i])) for i ∈ axes(b, 2))
 
 function move_left(board::Matrix{Bool}, shape::Matrix{Bool}, i::Int, j::Int)
     occupied = map(x -> x + CartesianIndex(i, j - 1), findall(shape))
