@@ -5,7 +5,7 @@ using AdventOfCode2022
 function day23(input::String = readInput(joinpath(@__DIR__, "..", "data", "day23.txt")))
     elvesmap = map(x -> x[1], reduce(vcat, permutedims.(map(x -> split(x, ""), split(input)))))
     elves = Set(findall(x -> x == '#', elvesmap))
-    
+
     for r ∈ 1:10
         elves, _ = round!(elves, r)
     end
@@ -27,7 +27,7 @@ end
 
 function Base.show(io::IO, M::Matrix{Char})
     for i ∈ axes(M, 1)
-        println(join(M[i,:]))
+        println(join(M[i, :]))
     end
 end
 
@@ -40,16 +40,16 @@ function round!(elves::Set{CartesianIndex{2}}, roundnumber::Int)
         "SE" => CartesianIndex(1, 1),
         "S" => CartesianIndex(1, 0),
         "SW" => CartesianIndex(1, -1),
-        "W" => CartesianIndex(0, -1)
+        "W" => CartesianIndex(0, -1),
     )
     order = Dict(
         1 => ("N", "NE", "NW"),
         2 => ("S", "SE", "SW"),
         3 => ("W", "NW", "SW"),
-        4 => ("E", "NE", "SE")
+        4 => ("E", "NE", "SE"),
     )
 
-    fromto = Dict{CartesianIndex{2},CartesianIndex{2}}()
+    fromto = Dict{CartesianIndex{2}, CartesianIndex{2}}()
     for elf ∈ elves
         if considers_moving(elves, elf)
             for i ∈ mod1.(roundnumber:roundnumber+3, 4)
