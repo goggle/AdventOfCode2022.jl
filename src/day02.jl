@@ -19,7 +19,7 @@ function play_round(opp::Char, me::Char)
     opp == 'B' && me == 'X' && return 0 + s
     opp == 'B' && me == 'Z' && return 6 + s
     opp == 'C' && me == 'X' && return 6 + s
-    opp == 'C' && me == 'Y' && return 0 + s 
+    opp == 'C' && me == 'Y' && return 0 + s
 end
 
 function choose(opp::Char, result::Char)
