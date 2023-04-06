@@ -11,13 +11,13 @@ function day24(input::String = readInput(joinpath(@__DIR__, "..", "data", "day24
     start = (1, 2)
     goal = (size(data, 1), size(data, 2) - 1)
     cycle = lcm(size(data, 1) - 2, size(data, 2) - 2)
-    
+
     # Precompute free points:
     up = map(x -> x.I, findall(x -> x == '^', data))
     down = map(x -> x.I, findall(x -> x == 'v', data))
     left = map(x -> x.I, findall(x -> x == '<', data))
     right = map(x -> x.I, findall(x -> x == '>', data))
-    available_points = Dict{Int,Set{Tuple{Int,Int}}}()
+    available_points = Dict{Int, Set{Tuple{Int, Int}}}()
     available_points[0] = setdiff(ground, union(up, down, left, right))
     for r ∈ 1:cycle-1
         for i ∈ axes(up, 1)
@@ -42,12 +42,12 @@ function day24(input::String = readInput(joinpath(@__DIR__, "..", "data", "day24
     return [p1, p1 + p22 + p23]
 end
 
-function solve(start::Tuple{Int,Int}, goal::Tuple{Int,Int}, available::Dict{Int,Set{Tuple{Int,Int}}}, starttime::Int, cycle::Int)
-    reachable_after = Dict{Int,Set{Tuple{Int,Int}}}()
+function solve(start::Tuple{Int, Int}, goal::Tuple{Int, Int}, available::Dict{Int, Set{Tuple{Int, Int}}}, starttime::Int, cycle::Int)
+    reachable_after = Dict{Int, Set{Tuple{Int, Int}}}()
     reachable_after[starttime] = Set([start])
     r = starttime + 1
     while true
-        reachable_after[r] = Set{Tuple{Int,Int}}()
+        reachable_after[r] = Set{Tuple{Int, Int}}()
         for point ∈ reachable_after[r-1]
             point == goal && return r - 1 - starttime
             if point ∈ available[mod(r, cycle)]
