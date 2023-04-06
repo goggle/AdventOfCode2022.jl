@@ -33,29 +33,30 @@ end
 end
 
 @testset "Day 7" begin
-    sample = "\$ cd /\n" *
-             "\$ ls\n" *
-             "dir a\n" *
-             "14848514 b.txt\n" *
-             "8504156 c.dat\n" *
-             "dir d\n" *
-             "\$ cd a\n" *
-             "\$ ls\n" *
-             "dir e\n" *
-             "29116 f\n" *
-             "2557 g\n" *
-             "62596 h.lst\n" *
-             "\$ cd e\n" *
-             "\$ ls\n" *
-             "584 i\n" *
-             "\$ cd ..\n" *
-             "\$ cd ..\n" *
-             "\$ cd d\n" *
-             "\$ ls\n" *
-             "4060174 j\n" *
-             "8033020 d.log\n" *
-             "5626152 d.ext\n" *
-             "7214296 k\n"
+    sample =
+        "\$ cd /\n" *
+        "\$ ls\n" *
+        "dir a\n" *
+        "14848514 b.txt\n" *
+        "8504156 c.dat\n" *
+        "dir d\n" *
+        "\$ cd a\n" *
+        "\$ ls\n" *
+        "dir e\n" *
+        "29116 f\n" *
+        "2557 g\n" *
+        "62596 h.lst\n" *
+        "\$ cd e\n" *
+        "\$ ls\n" *
+        "584 i\n" *
+        "\$ cd ..\n" *
+        "\$ cd ..\n" *
+        "\$ cd d\n" *
+        "\$ ls\n" *
+        "4060174 j\n" *
+        "8033020 d.log\n" *
+        "5626152 d.ext\n" *
+        "7214296 k\n"
     @test AdventOfCode2022.Day07.day07(sample) == [95437, 24933642]
     @test AdventOfCode2022.Day07.day07() == [1543140, 1117448]
 end
@@ -93,191 +94,194 @@ end
 end
 
 @testset "Day 10" begin
-    sample = "addx 15\n" *
-             "addx -11\n" *
-             "addx 6\n" *
-             "addx -3\n" *
-             "addx 5\n" *
-             "addx -1\n" *
-             "addx -8\n" *
-             "addx 13\n" *
-             "addx 4\n" *
-             "noop\n" *
-             "addx -1\n" *
-             "addx 5\n" *
-             "addx -1\n" *
-             "addx 5\n" *
-             "addx -1\n" *
-             "addx 5\n" *
-             "addx -1\n" *
-             "addx 5\n" *
-             "addx -1\n" *
-             "addx -35\n" *
-             "addx 1\n" *
-             "addx 24\n" *
-             "addx -19\n" *
-             "addx 1\n" *
-             "addx 16\n" *
-             "addx -11\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 21\n" *
-             "addx -15\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx -3\n" *
-             "addx 9\n" *
-             "addx 1\n" *
-             "addx -3\n" *
-             "addx 8\n" *
-             "addx 1\n" *
-             "addx 5\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx -36\n" *
-             "noop\n" *
-             "addx 1\n" *
-             "addx 7\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 2\n" *
-             "addx 6\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 7\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "addx -13\n" *
-             "addx 13\n" *
-             "addx 7\n" *
-             "noop\n" *
-             "addx 1\n" *
-             "addx -33\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 2\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 8\n" *
-             "noop\n" *
-             "addx -1\n" *
-             "addx 2\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "addx 17\n" *
-             "addx -9\n" *
-             "addx 1\n" *
-             "addx 1\n" *
-             "addx -3\n" *
-             "addx 11\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx -13\n" *
-             "addx -19\n" *
-             "addx 1\n" *
-             "addx 3\n" *
-             "addx 26\n" *
-             "addx -30\n" *
-             "addx 12\n" *
-             "addx -1\n" *
-             "addx 3\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx -9\n" *
-             "addx 18\n" *
-             "addx 1\n" *
-             "addx 2\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 9\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx -1\n" *
-             "addx 2\n" *
-             "addx -37\n" *
-             "addx 1\n" *
-             "addx 3\n" *
-             "noop\n" *
-             "addx 15\n" *
-             "addx -21\n" *
-             "addx 22\n" *
-             "addx -6\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "addx 2\n" *
-             "addx 1\n" *
-             "noop\n" *
-             "addx -10\n" *
-             "noop\n" *
-             "noop\n" *
-             "addx 20\n" *
-             "addx 1\n" *
-             "addx 2\n" *
-             "addx 2\n" *
-             "addx -6\n" *
-             "addx -11\n" *
-             "noop\n" *
-             "noop\n" *
-             "noop\n"
+    sample =
+        "addx 15\n" *
+        "addx -11\n" *
+        "addx 6\n" *
+        "addx -3\n" *
+        "addx 5\n" *
+        "addx -1\n" *
+        "addx -8\n" *
+        "addx 13\n" *
+        "addx 4\n" *
+        "noop\n" *
+        "addx -1\n" *
+        "addx 5\n" *
+        "addx -1\n" *
+        "addx 5\n" *
+        "addx -1\n" *
+        "addx 5\n" *
+        "addx -1\n" *
+        "addx 5\n" *
+        "addx -1\n" *
+        "addx -35\n" *
+        "addx 1\n" *
+        "addx 24\n" *
+        "addx -19\n" *
+        "addx 1\n" *
+        "addx 16\n" *
+        "addx -11\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 21\n" *
+        "addx -15\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx -3\n" *
+        "addx 9\n" *
+        "addx 1\n" *
+        "addx -3\n" *
+        "addx 8\n" *
+        "addx 1\n" *
+        "addx 5\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx -36\n" *
+        "noop\n" *
+        "addx 1\n" *
+        "addx 7\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 2\n" *
+        "addx 6\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 7\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "addx -13\n" *
+        "addx 13\n" *
+        "addx 7\n" *
+        "noop\n" *
+        "addx 1\n" *
+        "addx -33\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 2\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 8\n" *
+        "noop\n" *
+        "addx -1\n" *
+        "addx 2\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "addx 17\n" *
+        "addx -9\n" *
+        "addx 1\n" *
+        "addx 1\n" *
+        "addx -3\n" *
+        "addx 11\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx -13\n" *
+        "addx -19\n" *
+        "addx 1\n" *
+        "addx 3\n" *
+        "addx 26\n" *
+        "addx -30\n" *
+        "addx 12\n" *
+        "addx -1\n" *
+        "addx 3\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx -9\n" *
+        "addx 18\n" *
+        "addx 1\n" *
+        "addx 2\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 9\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx -1\n" *
+        "addx 2\n" *
+        "addx -37\n" *
+        "addx 1\n" *
+        "addx 3\n" *
+        "noop\n" *
+        "addx 15\n" *
+        "addx -21\n" *
+        "addx 22\n" *
+        "addx -6\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "addx 2\n" *
+        "addx 1\n" *
+        "noop\n" *
+        "addx -10\n" *
+        "noop\n" *
+        "noop\n" *
+        "addx 20\n" *
+        "addx 1\n" *
+        "addx 2\n" *
+        "addx 2\n" *
+        "addx -6\n" *
+        "addx -11\n" *
+        "noop\n" *
+        "noop\n" *
+        "noop\n"
     @test AdventOfCode2022.Day10.day10(sample)[1] == 13140
     p1, p2 = AdventOfCode2022.Day10.day10()
     @test p1 == 13740
-    @test p2 == "████ █  █ ███  ███  ████ ████  ██  █    \n" *
-                "   █ █  █ █  █ █  █ █    █    █  █ █    \n" *
-                "  █  █  █ █  █ █  █ ███  ███  █    █    \n" *
-                " █   █  █ ███  ███  █    █    █    █    \n" *
-                "█    █  █ █    █ █  █    █    █  █ █    \n" *
-                "████  ██  █    █  █ █    ████  ██  ████ \n"
+    @test p2 ==
+          "████ █  █ ███  ███  ████ ████  ██  █    \n" *
+          "   █ █  █ █  █ █  █ █    █    █  █ █    \n" *
+          "  █  █  █ █  █ █  █ ███  ███  █    █    \n" *
+          " █   █  █ ███  ███  █    █    █    █    \n" *
+          "█    █  █ █    █ █  █    █    █  █ █    \n" *
+          "████  ██  █    █  █ █    ████  ██  ████ \n"
 end
 
 @testset "Day 11" begin
-    sample = "Monkey 0:\n" *
-             "  Starting items: 79, 98\n" *
-             "  Operation: new = old * 19\n" *
-             "  Test: divisible by 23\n" *
-             "    If true: throw to monkey 2\n" *
-             "    If false: throw to monkey 3\n" *
-             "\n" *
-             "Monkey 1:\n" *
-             "  Starting items: 54, 65, 75, 74\n" *
-             "  Operation: new = old + 6\n" *
-             "  Test: divisible by 19\n" *
-             "    If true: throw to monkey 2\n" *
-             "    If false: throw to monkey 0\n" *
-             "\n" *
-             "Monkey 2:\n" *
-             "  Starting items: 79, 60, 97\n" *
-             "  Operation: new = old * old\n" *
-             "  Test: divisible by 13\n" *
-             "    If true: throw to monkey 1\n" *
-             "    If false: throw to monkey 3\n" *
-             "\n" *
-             "Monkey 3:\n" *
-             "  Starting items: 74\n" *
-             "  Operation: new = old + 3\n" *
-             "  Test: divisible by 17\n" *
-             "    If true: throw to monkey 0\n" *
-             "    If false: throw to monkey 1\n"
+    sample =
+        "Monkey 0:\n" *
+        "  Starting items: 79, 98\n" *
+        "  Operation: new = old * 19\n" *
+        "  Test: divisible by 23\n" *
+        "    If true: throw to monkey 2\n" *
+        "    If false: throw to monkey 3\n" *
+        "\n" *
+        "Monkey 1:\n" *
+        "  Starting items: 54, 65, 75, 74\n" *
+        "  Operation: new = old + 6\n" *
+        "  Test: divisible by 19\n" *
+        "    If true: throw to monkey 2\n" *
+        "    If false: throw to monkey 0\n" *
+        "\n" *
+        "Monkey 2:\n" *
+        "  Starting items: 79, 60, 97\n" *
+        "  Operation: new = old * old\n" *
+        "  Test: divisible by 13\n" *
+        "    If true: throw to monkey 1\n" *
+        "    If false: throw to monkey 3\n" *
+        "\n" *
+        "Monkey 3:\n" *
+        "  Starting items: 74\n" *
+        "  Operation: new = old + 3\n" *
+        "  Test: divisible by 17\n" *
+        "    If true: throw to monkey 0\n" *
+        "    If false: throw to monkey 1\n"
     @test AdventOfCode2022.Day11.day11(sample) == [10605, 2713310158]
     @test AdventOfCode2022.Day11.day11() == [110888, 25590400731]
 end
@@ -293,29 +297,30 @@ end
 end
 
 @testset "Day 13" begin
-    sample = "[1,1,3,1,1]\n" *
-             "[1,1,5,1,1]\n" *
-             "\n" *
-             "[[1],[2,3,4]]\n" *
-             "[[1],4]\n" *
-             "\n" *
-             "[9]\n" *
-             "[[8,7,6]]\n" *
-             "\n" *
-             "[[4,4],4,4]\n" *
-             "[[4,4],4,4,4]\n" *
-             "\n" *
-             "[7,7,7,7]\n" *
-             "[7,7,7]\n" *
-             "\n" *
-             "[]\n" *
-             "[3]\n" *
-             "\n" *
-             "[[[]]]\n" *
-             "[[]]\n" *
-             "\n" *
-             "[1,[2,[3,[4,[5,6,7]]]],8,9]\n" *
-             "[1,[2,[3,[4,[5,6,0]]]],8,9]\n"
+    sample =
+        "[1,1,3,1,1]\n" *
+        "[1,1,5,1,1]\n" *
+        "\n" *
+        "[[1],[2,3,4]]\n" *
+        "[[1],4]\n" *
+        "\n" *
+        "[9]\n" *
+        "[[8,7,6]]\n" *
+        "\n" *
+        "[[4,4],4,4]\n" *
+        "[[4,4],4,4,4]\n" *
+        "\n" *
+        "[7,7,7,7]\n" *
+        "[7,7,7]\n" *
+        "\n" *
+        "[]\n" *
+        "[3]\n" *
+        "\n" *
+        "[[[]]]\n" *
+        "[[]]\n" *
+        "\n" *
+        "[1,[2,[3,[4,[5,6,7]]]],8,9]\n" *
+        "[1,[2,[3,[4,[5,6,0]]]],8,9]\n"
     @test AdventOfCode2022.Day13.day13(sample) == [13, 140]
     @test AdventOfCode2022.Day13.day13() == [5659, 22110]
 end
@@ -332,16 +337,17 @@ end
 end
 
 @testset "Day 16" begin
-    sample = "Valve AA has flow rate=0; tunnels lead to valves DD, II, BB\n" *
-             "Valve BB has flow rate=13; tunnels lead to valves CC, AA\n" *
-             "Valve CC has flow rate=2; tunnels lead to valves DD, BB\n" *
-             "Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE\n" *
-             "Valve EE has flow rate=3; tunnels lead to valves FF, DD\n" *
-             "Valve FF has flow rate=0; tunnels lead to valves EE, GG\n" *
-             "Valve GG has flow rate=0; tunnels lead to valves FF, HH\n" *
-             "Valve HH has flow rate=22; tunnel leads to valve GG\n" *
-             "Valve II has flow rate=0; tunnels lead to valves AA, JJ\n" *
-             "Valve JJ has flow rate=21; tunnel leads to valve II\n"
+    sample =
+        "Valve AA has flow rate=0; tunnels lead to valves DD, II, BB\n" *
+        "Valve BB has flow rate=13; tunnels lead to valves CC, AA\n" *
+        "Valve CC has flow rate=2; tunnels lead to valves DD, BB\n" *
+        "Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE\n" *
+        "Valve EE has flow rate=3; tunnels lead to valves FF, DD\n" *
+        "Valve FF has flow rate=0; tunnels lead to valves EE, GG\n" *
+        "Valve GG has flow rate=0; tunnels lead to valves FF, HH\n" *
+        "Valve HH has flow rate=22; tunnel leads to valve GG\n" *
+        "Valve II has flow rate=0; tunnels lead to valves AA, JJ\n" *
+        "Valve JJ has flow rate=21; tunnel leads to valve II\n"
     @test AdventOfCode2022.Day16.day16(sample) == [1651, 1707]
     @test AdventOfCode2022.Day16.day16() == [1792, 2587]
 end
@@ -371,8 +377,9 @@ end
 end
 
 @testset "Day 19" begin
-    sample = "Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.\n" *
-             "Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian."
+    sample =
+        "Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.\n" *
+        "Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian."
     @test AdventOfCode2022.Day19.day19(sample) == [33, 3472]
     @test AdventOfCode2022.Day19.day19() == [1616, 8990]
 end
@@ -390,21 +397,22 @@ end
 end
 
 @testset "Day 21" begin
-    sample = "root: pppw + sjmn\n" *
-             "dbpl: 5\n" *
-             "cczh: sllz + lgvd\n" *
-             "zczc: 2\n" *
-             "ptdq: humn - dvpt\n" *
-             "dvpt: 3\n" *
-             "lfqf: 4\n" *
-             "humn: 5\n" *
-             "ljgn: 2\n" *
-             "sjmn: drzm * dbpl\n" *
-             "sllz: 4\n" *
-             "pppw: cczh / lfqf\n" *
-             "lgvd: ljgn * ptdq\n" *
-             "drzm: hmdt - zczc\n" *
-             "hmdt: 32\n"
+    sample =
+        "root: pppw + sjmn\n" *
+        "dbpl: 5\n" *
+        "cczh: sllz + lgvd\n" *
+        "zczc: 2\n" *
+        "ptdq: humn - dvpt\n" *
+        "dvpt: 3\n" *
+        "lfqf: 4\n" *
+        "humn: 5\n" *
+        "ljgn: 2\n" *
+        "sjmn: drzm * dbpl\n" *
+        "sllz: 4\n" *
+        "pppw: cczh / lfqf\n" *
+        "lgvd: ljgn * ptdq\n" *
+        "drzm: hmdt - zczc\n" *
+        "hmdt: 32\n"
     @test AdventOfCode2022.Day21.day21(sample) == [152, 301]
     @test AdventOfCode2022.Day21.day21() == [10037517593724, 3272260914328]
 end
