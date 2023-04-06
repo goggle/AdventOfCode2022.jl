@@ -4,8 +4,8 @@ using AdventOfCode2022
 
 mutable struct CircularList
     value::Int
-    prev::Union{CircularList,Nothing}
-    next::Union{CircularList,Nothing}
+    prev::Union{CircularList, Nothing}
+    next::Union{CircularList, Nothing}
 end
 
 function day20(input::String = readInput(joinpath(@__DIR__, "..", "data", "day20.txt")))
@@ -13,7 +13,7 @@ function day20(input::String = readInput(joinpath(@__DIR__, "..", "data", "day20
     shuffle!(initial_order)
     p1 = get_grove_number(zero, length(initial_order))
 
-    cl, initial_order, zero = parse_input(input; decryption_key=811589153)
+    cl, initial_order, zero = parse_input(input; decryption_key = 811589153)
     for _ ∈ 1:10
         shuffle!(initial_order)
     end
@@ -56,11 +56,11 @@ function move!(src::CircularList, capacity::Int, n::Int)
     src.prev = prev
 end
 
-function parse_input(input; decryption_key=1)
+function parse_input(input; decryption_key = 1)
     numbers = parse.(Int, split(rstrip(input), "\n")) .* decryption_key
     circ = [CircularList(number, nothing, nothing) for number ∈ numbers]
     zero = circ[end]
-    for i ∈ axes(circ,1)[1:end-1]
+    for i ∈ axes(circ, 1)[1:end-1]
         circ[i].next = circ[i+1]
         if circ[i].value == 0
             zero = circ[i]
@@ -68,7 +68,7 @@ function parse_input(input; decryption_key=1)
     end
     circ[end].next = circ[1]
     circ[1].prev = circ[end]
-    for i ∈ axes(circ,1)[2:end]
+    for i ∈ axes(circ, 1)[2:end]
         circ[i].prev = circ[i-1]
     end
 
