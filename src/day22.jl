@@ -4,12 +4,12 @@ using AdventOfCode2022
 
 function day22(input::String = readInput(joinpath(@__DIR__, "..", "data", "day22.txt")))
     mapdata, instructions = parse_input(input)
-    next_idx = Dict{Int,Matrix{Int}}()
-    for k = 0:3
+    next_idx = Dict{Int, Matrix{Int}}()
+    for k ∈ 0:3
         next_idx[k] = next_index_map(mapdata, k)
     end
     direction_change = deepcopy(next_idx)
-    for k = 0:3
+    for k ∈ 0:3
         direction_change[k] .= -1
     end
     p1 = solve(mapdata, next_idx, direction_change, instructions)
@@ -29,7 +29,7 @@ function day22(input::String = readInput(joinpath(@__DIR__, "..", "data", "day22
         11 => to1d.(101:150, 1, nrows),
         12 => to1d.(101, 1:50, nrows),
         13 => to1d.(51:100, 51, nrows),
-        14 => to1d.(1:50, 51, nrows)
+        14 => to1d.(1:50, 51, nrows),
     )
     connections = Dict(
         1 => (10, true, 3, 0),
@@ -45,9 +45,9 @@ function day22(input::String = readInput(joinpath(@__DIR__, "..", "data", "day22
         11 => (14, false, 2, 0),
         12 => (13, true, 3, 0),
         13 => (12, true, 2, 1),
-        14 => (11, false, 2, 0)
+        14 => (11, false, 2, 0),
     )
-    
+
     for (k, (v, orientation, dirstart, dirend)) ∈ connections
         if orientation
             next_idx[dirstart][boarders[k]] .= boarders[v]
@@ -61,8 +61,8 @@ function day22(input::String = readInput(joinpath(@__DIR__, "..", "data", "day22
     return [p1, p2]
 end
 
-function solve(mapdata::Matrix{Char}, next_idx::Dict{Int,Matrix{Int}}, direction_change::Dict{Int,Matrix{Int}}, instructions::Vector{Any})    
-    ind = to1d(1, findfirst(x -> x == '.', mapdata[1,:]), size(mapdata, 1))
+function solve(mapdata::Matrix{Char}, next_idx::Dict{Int, Matrix{Int}}, direction_change::Dict{Int, Matrix{Int}}, instructions::Vector{Any})
+    ind = to1d(1, findfirst(x -> x == '.', mapdata[1, :]), size(mapdata, 1))
     dir = 0
     for instruction ∈ instructions
         if isa(instruction, Number)
