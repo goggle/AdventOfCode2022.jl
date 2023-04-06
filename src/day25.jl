@@ -4,16 +4,16 @@ using AdventOfCode2022
 
 function day25(input::String = readInput(joinpath(@__DIR__, "..", "data", "day25.txt")))
     numbers = Vector{Vector{Int}}()
-    for line ∈ eachsplit(input, "\n", keepempty=false)
+    for line ∈ eachsplit(input, "\n", keepempty = false)
         d = Dict(
             '2' => 2,
             '1' => 1,
             '0' => 0,
             '-' => -1,
-            '=' => -2
+            '=' => -2,
         )
         sp = map(x -> d[x[1]], split(line, ""))
-        push!(numbers, sp)        
+        push!(numbers, sp)
     end
     s = [0]
     for snafu ∈ numbers
@@ -24,7 +24,7 @@ function day25(input::String = readInput(joinpath(@__DIR__, "..", "data", "day25
         -1 => '-',
         0 => '0',
         1 => '1',
-        2 => '2'
+        2 => '2',
     )
     return join(map(x -> d[x], s))
 end
